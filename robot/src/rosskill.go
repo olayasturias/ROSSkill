@@ -72,28 +72,29 @@ func (d *rosskill) publishDistance() {
 		log.Error.Println(err)
 		}
 		C.PublishRange(d.distancePublisher,C.float(dist32))
-		log.Info.Println("Sent Distance topic", dist)
+		log.Info.Println("Sent Distance topic", C.float(dist32))
 	}
 }
 
 func (d *rosskill) OnStart() {
-	err := media.Start()
-        err2 := distance.Start()
-	if err != nil {
-		log.Error.Println("Media start err:", err)
-		return
-	}
+	// err := media.Start()
+  err2 := distance.Start()
+	// if err != nil {
+	// 	log.Error.Println("Media start err:", err)
+	// 	return
+	// }
 	if err2 != nil {
-		log.Error.Println("Distance start err:", err)
+		log.Error.Println("Distance start err:", err2)
 		return
 	}
-	d.publishImages()
-	//d.publishDistance()
+	//d.publishImages()
+	d.publishDistance()
 }
 
 func (d *rosskill) OnClose() {
 	d.stop <- true
-	C.DeleteImagePublisher(d.imagePublisher)
-	media.Close()
+	//C.DeleteImagePublisher(d.imagePublisher)
+	C.DeleteRangePublisher(d.distancePublisher)
+	// media.Close()
 	distance.Close()
 }

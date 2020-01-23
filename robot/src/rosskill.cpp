@@ -31,7 +31,7 @@ class RangePublisherWrapper {
         // Default OUTPUT_SIZE of NodeHandle is too small to send images, we have to create it manually.
         // Rosserial limits the number of Publishers and Subscribers to 25
         // NH params: Hardware type | Max publishers | Max subscribers | Input Buffer size | Output buffer size
-        ros::NodeHandle_<EmbeddedLinuxHardware, 25, 25, 512, 32767> nh;
+        ros::NodeHandle_<EmbeddedLinuxHardware, 25, 25, 0, 32767> nh;
         sensor_msgs::Range range;
         ros::Publisher publisher;
     public:
