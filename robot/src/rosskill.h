@@ -3,12 +3,16 @@ extern "C" {
 #endif
 
 typedef struct {
-    void * wrapper; // ImagePublisherWrapper, because we can't use any c++ class directly in cgo.
-}ImagePublisher;
+    void * wrapper; // TopicPublisherWrapper, because we can't use any c++ class directly in cgo.
+}TopicPublisher;
 
-ImagePublisher* NewImagePublisher(char *ip, char *topic);
-void PublishImage(ImagePublisher* pub, unsigned char*data, int len);
-void DeleteImagePublisher(ImagePublisher* pub);
+TopicPublisher* NewImagePublisher(char *ip, char *topic);
+void PublishImage(TopicPublisher* pub, unsigned char*data, int len);
+void DeleteImagePublisher(TopicPublisher* pub);
+
+TopicPublisher* NewRangePublisher(char *ip, char *topic);
+void PublishRange(TopicPublisher* pub, float data);
+void DeleteRangePublisher(TopicPublisher* pub);
 
 #ifdef __cplusplus
 }
